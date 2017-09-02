@@ -317,7 +317,7 @@ function idea_factory_localized_args( $max = '', $paged = '' ){
 
 	$args = array(
 		'ajaxurl' 		=> admin_url( 'admin-ajax.php' ),
-		'nonce'			=> wp_create_nonce('idea_factory'),
+		'lb_nonce'			=> wp_create_nonce('idea_factory'),
 		'error_message' => apply_filters('idea_factory_error',__('Awww snap, something went wrong!','idea-factory')),
 		'label'			=> apply_filters('idea_factory_loadmore_label',__('Load more ideas','idea-factory')),
 		'label_loading' => apply_filters('idea_factory_loadmore_loading',__('Loading ideas...','idea-factory')),
@@ -476,10 +476,3 @@ if ( !function_exists('idea_factory_vote_status') ):
 	}
 
 endif;
-
-
-
-
-
-
-

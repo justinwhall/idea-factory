@@ -5,6 +5,7 @@ jQuery(document).ready(function($){
 		results         = $('#idea-factory--entry--form-results'),
 		thanks_voting   = idea_factory.thanks_voting,
 		already_voted   = idea_factory.already_voted,
+		nonce   = idea_factory.lb_nonce,
 		error_message 	= idea_factory.error_message;
 
 
@@ -12,7 +13,7 @@ jQuery(document).ready(function($){
   	$('#idea-factory--entry--form').submit(function(e) {
 
   		var $this = $(this);
-
+      
   		e.preventDefault();
 
 	   	if ( $.trim( $('#idea-factory--entryform_title').val() ) === '' || $.trim( $('#idea-factory--entryform_description').val() ) === '' ) {
@@ -23,13 +24,24 @@ jQuery(document).ready(function($){
 	    }
 
 		$this.find(':submit').attr( 'disabled','disabled' );
-
-  		var data = $this.serialize();
-
-	  	$.post(ajaxurl, data, function(response) {
-	  		$(results).html(response);
-	  		location.reload();
-	    });
+    
+    var data = {
+      action : 'process_entry_lb',
+      'idea-title' : $('#idea-factory--entryform_title').val(),
+      'idea-description' : $('#idea-factory--entryform_description').val(),
+      'nonce' : nonce
+    }
+    
+    
+      $.ajax({
+        url     : ajaxurl,
+        type    : 'POST',
+        data    : data,
+        success : function( resp ){
+          $(results).html(resp);
+          // location.reload();
+        }
+      });
 
     });
 
@@ -42,7 +54,7 @@ jQuery(document).ready(function($){
 			action:    $this.hasClass('vote-up') ? 'process_vote_up' : 'process_vote_down',
 			user_id:   $this.data('user-id'),
 			post_id:   $this.data('post-id'),
-			nonce:     idea_factory.nonce
+			nonce:     idea_factory.lb_nonce
 		};
 
 		$.post( ajaxurl, data, function(response) {

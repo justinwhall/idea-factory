@@ -20,6 +20,8 @@ class ideaFactoryTemplateLoader {
 	* @return page template based on view regardless if the post type doesnt even exist yet due to no posts
 	*/
 	function template_loader( $template ) {
+    
+    if ( is_single() ) return $template;
 
 		$disable_archive = idea_factory_get_option('if_disable_archive','if_settings_advanced');
 

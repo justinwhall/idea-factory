@@ -27,7 +27,11 @@ class ideaFactoryAssetLoader {
 	    		wp_enqueue_style('idea-factory-css', IDEA_FACTORY_URL.'/public/assets/css/idea-factory.css', IDEA_FACTORY_VERSION, true );
 			}
 
-			wp_enqueue_script('idea-factory-script', IDEA_FACTORY_URL.'/public/assets/js/idea-factory.js', array('jquery'), IDEA_FACTORY_VERSION, true);
+			wp_enqueue_script('idea-factory-load', IDEA_FACTORY_URL.'/public/assets/js/load-posts.js', array('jquery'), IDEA_FACTORY_VERSION, true);
+			wp_enqueue_script('idea-factory-modals', IDEA_FACTORY_URL.'/public/assets/js/modal.js', array('jquery'), IDEA_FACTORY_VERSION, true);
+			wp_enqueue_script('idea-factory-transitions', IDEA_FACTORY_URL.'/public/assets/js/transition.js', array('jquery'), IDEA_FACTORY_VERSION, true);
+      
+			wp_enqueue_script('idea-factory-script', IDEA_FACTORY_URL.'/public/assets/js/general.js', array('jquery'), '4.12', true);
 			wp_localize_script('idea-factory-script', 'idea_factory', idea_factory_localized_args( $max , $paged) );
 
 		endif;

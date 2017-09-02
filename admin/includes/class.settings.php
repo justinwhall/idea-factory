@@ -378,9 +378,3 @@ class if_settings_api_wrap {
 endif;
 
 $settings = new if_settings_api_wrap();
-
-
-
-
-
-
